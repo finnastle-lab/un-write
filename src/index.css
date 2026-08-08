@@ -1,8 +1,9 @@
 :root {
   --paper: #faf8f4;
+  --surface: #f0ede6; /* boxes sit a shade off the page so they read as boxes */
   --ink: #1c1a17;
   --muted: #8a8378;
-  --line: #e6e1d8;
+  --line: #dcd6cb; /* light-gray hairline */
   --accent: #b4531f;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
@@ -11,6 +12,7 @@
    until the toggle has spoken (React stamps data-theme on <html> after mount) */
 :root[data-theme="dark"] {
   --paper: #17150f;
+  --surface: #211e17;
   --ink: #ece7dd;
   --muted: #8f887b;
   --line: #2c2921;
@@ -20,6 +22,7 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --paper: #17150f;
+    --surface: #211e17;
     --ink: #ece7dd;
     --muted: #8f887b;
     --line: #2c2921;
@@ -95,7 +98,7 @@ body {
   height: 36px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: transparent;
+  background: var(--surface);
   color: var(--muted);
   cursor: pointer;
   transition: color 0.2s ease, border-color 0.2s ease;
@@ -235,6 +238,10 @@ body {
   box-shadow: inset 0 -2px 0 0 currentColor;
   cursor: help;
 }
+.tell-semantic {
+  color: #6366d1;
+  background: color-mix(in srgb, #6366d1 15%, transparent);
+}
 .tell-structure {
   color: #bd4d86;
   background: color-mix(in srgb, #bd4d86 13%, transparent);
@@ -312,6 +319,15 @@ body {
   transform: rotate(-4deg);
   opacity: 0.9;
 }
+.stamp a {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 0.15s ease;
+}
+.stamp a:hover {
+  opacity: 0.65;
+}
 .stamp img {
   height: 30px;
   width: auto;
@@ -325,32 +341,120 @@ body {
   color: var(--muted);
 }
 
-/* the yin-yang flourish, low in the score rail */
-.flourish {
-  display: block;
-  width: 96px;
-  height: auto;
-  margin: 40px auto 0;
-  opacity: 0.16;
-  pointer-events: none;
+/* --- deep pass (v3) ----------------------------------------------------- */
+.deep {
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+.deep-btn {
+  width: 100%;
+  padding: 9px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.deep-btn:hover:not(:disabled) {
+  background: #6366d1;
+  border-color: #6366d1;
+  color: #fff;
+}
+.deep-btn:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.deep-note {
+  margin: 10px 0 0;
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.deep-status {
+  margin: 10px 0 0;
+  font-size: 12px;
+  color: #6366d1;
+}
+.deep-status.deep-err {
+  color: #c0432f;
+}
+.key-form {
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.key-form input {
+  flex: 1 1 120px;
+  min-width: 0;
+  padding: 7px 9px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 13px;
+}
+.key-form button {
+  padding: 7px 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--ink);
+  cursor: pointer;
+}
+.key-note {
+  flex-basis: 100%;
+  margin: 2px 0 0;
+  font-size: 11px;
+  color: var(--muted);
+}
+.key-forget {
+  margin-top: 10px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--muted);
+  font-size: 11px;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 @media (max-width: 720px) {
   .app {
     grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto;
     grid-template-areas:
       "chrome"
-      "score"
       "pane"
+      "score"
       "admission";
+    height: auto;
+    min-height: 100%;
+  }
+  /* editor first on mobile — you're here to paste text. Give it real height
+     and let the whole page scroll rather than the editor scrolling inside. */
+  .pane {
+    height: 58vh;
+    border-bottom: 1px solid var(--line);
   }
   .score {
     width: auto;
     border-left: none;
-    border-bottom: 1px solid var(--line);
-    padding: 16px 28px;
+    padding: 20px 28px;
   }
   .score-number {
-    font-size: 44px;
+    font-size: 48px;
+  }
+  .admission {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+  }
+  .stamp {
+    align-self: flex-end;
   }
 }

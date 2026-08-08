@@ -1,15 +1,22 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Editor from "./Editor";
-import { analyse, CATEGORY_META, type Category, RULESET_VERSION } from "./rules";
+import {
+  analyse,
+  CATEGORY_META,
+  type Category,
+  type Match,
+  resolveOverlaps,
+  RULESET_VERSION,
+} from "./rules";
 import { score } from "./score";
 import { useTheme } from "./useTheme";
+import { DeepPassError, runDeepPass } from "./deepPass";
 import cloud from "./assets/cloud.png";
-import yinyangBlack from "./assets/yinyang-black.png";
-import yinyangWhite from "./assets/yinyang-white.png";
 import signatureBlack from "./assets/signature-black.png";
 import signatureWhite from "./assets/signature-white.png";
 
 const CATEGORIES = Object.keys(CATEGORY_META) as Category[];
+const KEY_STORE = "un-write-anthropic-key";
 
 // A verdict line for the headline number. Deflating on purpose — the tool
 // doesn't get to sound like a tool.
@@ -22,15 +29,68 @@ function verdict(n: number, hasText: boolean): string {
   return "clean, or too short to tell";
 }
 
+type DeepStatus = "idle" | "loading" | "done" | "error";
+
 export default function App() {
   const [doc, setDoc] = useState("");
   const [theme, toggleTheme] = useTheme();
 
-  const matches = useMemo(() => analyse(doc), [doc]);
+  const localMatches = useMemo(() => analyse(doc), [doc]);
+
+  // --- deep pass (v3) -----------------------------------------------------
+  const [deepMatches, setDeepMatches] = useState<Match[]>([]);
+  const [deepStatus, setDeepStatus] = useState<DeepStatus>("idle");
+  const [deepError, setDeepError] = useState("");
+  const [apiKey, setApiKey] = useState(() => localStorage.getItem(KEY_STORE) ?? "");
+  const [showKey, setShowKey] = useState(false);
+  const keyInput = useRef<HTMLInputElement>(null);
+
+  // deep-pass results are tied to the exact text — a keystroke invalidates them
+  useEffect(() => {
+    setDeepMatches([]);
+    setDeepStatus("idle");
+  }, [doc]);
+
+  async function deepPass() {
+    if (!doc.trim()) return;
+    if (!apiKey) {
+      setShowKey(true);
+      queueMicrotask(() => keyInput.current?.focus());
+      return;
+    }
+    setDeepStatus("loading");
+    setDeepError("");
+    try {
+      setDeepMatches(await runDeepPass(doc, apiKey));
+      setDeepStatus("done");
+    } catch (e) {
+      setDeepStatus("error");
+      setDeepError(e instanceof DeepPassError ? e.message : "Something went wrong.");
+    }
+  }
+
+  function saveKey() {
+    const v = keyInput.current?.value.trim() ?? "";
+    if (!v) return;
+    localStorage.setItem(KEY_STORE, v);
+    setApiKey(v);
+    setShowKey(false);
+    void deepPass();
+  }
+
+  function forgetKey() {
+    localStorage.removeItem(KEY_STORE);
+    setApiKey("");
+    setDeepMatches([]);
+    setDeepStatus("idle");
+  }
+
+  const matches = useMemo(
+    () => resolveOverlaps([...localMatches, ...deepMatches]),
+    [localMatches, deepMatches],
+  );
   const result = useMemo(() => score(doc, matches), [doc, matches]);
   const hasText = result.words > 0;
-
-  const yinyang = theme === "dark" ? yinyangWhite : yinyangBlack;
   const signature = theme === "dark" ? signatureWhite : signatureBlack;
 
   return (
@@ -107,7 +167,51 @@ export default function App() {
           </p>
         </details>
 
-        <img className="flourish" src={yinyang} alt="" aria-hidden="true" />
+        <div className="deep">
+          <button
+            className="deep-btn"
+            onClick={deepPass}
+            disabled={deepStatus === "loading" || !hasText}
+          >
+            {deepStatus === "loading" ? "reading…" : "deep pass"}
+          </button>
+          <p className="deep-note">
+            The semantic tells regex can't catch. Sends your text to Anthropic
+            with your own API key. Off-device, opt-in — that's the honest break
+            in the local-first promise, and yes, an AI grading you for sounding
+            like AI.
+          </p>
+          {deepStatus === "done" && (
+            <p className="deep-status">
+              {deepMatches.length
+                ? `${deepMatches.length} flagged — indigo underline.`
+                : "Nothing the model would swear to."}
+            </p>
+          )}
+          {deepStatus === "error" && (
+            <p className="deep-status deep-err">{deepError}</p>
+          )}
+          {showKey && (
+            <div className="key-form">
+              <input
+                ref={keyInput}
+                type="password"
+                placeholder="sk-ant-…"
+                aria-label="Anthropic API key"
+                onKeyDown={(e) => e.key === "Enter" && saveKey()}
+              />
+              <button onClick={saveKey}>save</button>
+              <p className="key-note">
+                Stored only in this browser. Get one at console.anthropic.com.
+              </p>
+            </div>
+          )}
+          {apiKey && !showKey && (
+            <button className="key-forget" onClick={forgetKey}>
+              forget key
+            </button>
+          )}
+        </div>
       </aside>
 
       <footer className="admission">
@@ -117,8 +221,14 @@ export default function App() {
           We know. That's the joke, and it's on all of us.
         </p>
         <figure className="stamp">
-          <img src={signature} alt="Finn Astle" />
-          <figcaption>passed through the un-write</figcaption>
+          <a
+            href="https://astlecreative.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src={signature} alt="Finn Astle" />
+            <figcaption>Built by Finn Astle. Free Access.</figcaption>
+          </a>
         </figure>
       </footer>
     </div>

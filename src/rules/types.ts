@@ -3,6 +3,7 @@
 // used by both the editor decorations and the legend.
 
 export type Category =
+  | "semantic"
   | "structure"
   | "punctuation"
   | "phrase"
@@ -38,6 +39,8 @@ export const CATEGORY_META: Record<
   Category,
   { label: string; weight: number; color: string }
 > = {
+  // the v3 deep pass — model-judged semantic tells, as durable as structural
+  semantic: { label: "semantic (deep pass)", weight: 3, color: "#6366d1" },
   // structural tells are the durable ones — weighted hardest
   structure: { label: "structure / rhythm", weight: 3, color: "#bd4d86" },
   transition: { label: "transition / hedge", weight: 1.5, color: "#2f7dc0" },

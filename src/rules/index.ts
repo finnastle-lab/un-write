@@ -44,3 +44,4 @@ export function analyse(text: string): Match[] {
 
 export type { Match, Category, Rule } from "./types";
 export { CATEGORY_META } from "./types";
+export { resolveOverlaps } from "./exclusions";

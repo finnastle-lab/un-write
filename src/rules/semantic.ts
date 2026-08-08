@@ -33,7 +33,7 @@ export type DeepPass = (text: string) => Promise<DeepPassFinding[]>;
 export function toMatches(findings: DeepPassFinding[]): Match[] {
   return findings.map((f) => ({
     ...f,
-    category: "structure",
+    category: "semantic",
     weight: 3,
   }));
 }

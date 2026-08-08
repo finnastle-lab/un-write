@@ -10,7 +10,7 @@ The joke it owns: a tool that rewrites your text to sound less like AI is an AI 
 
 - **v1** — cleanly-detectable tells (regex/string), exclusion gate, colour-coded highlights, hover notes in FA's voice, transparent score.
 - **v2** — structural / rhythm tells via a sentence+paragraph tokenizer: staccato runs, "marching in formation", setup-then-list openers, negation→affirmation, rule-of-three, punchy two-word closers. These carry the durable **weight-3** end of the score.
-- **v3 (scaffolded, inert)** — `src/rules/semantic.ts` is the socket for the semantic layer (teleporting arguments, faux balance, near-miss metaphors). It needs an off-device model, so it's a separate opt-in layer and does nothing until a deep pass is wired.
+- **v3 — deep pass (live, opt-in)** — the semantic layer (teleporting arguments, faux balance, near-miss metaphors, superficial -ing analysis, performed warmth). Model-judged, so it runs **off-device**: the user brings their own Anthropic API key (`claude-sonnet-5`), stored only in their browser, and text is sent to Anthropic only when they click *deep pass*. The honest break in the local-first promise, surfaced in the UI. `src/deepPass.ts` is the browser-direct call; `src/rules/semantic.ts` holds the types.
 
 Clean human prose scores ~0; AI slop pegs 100; structural tells move it hardest.
 
