@@ -6,17 +6,22 @@ The joke it owns: a tool that rewrites your text to sound less like AI is an AI 
 
 ## Status
 
-**v1 live** — https://finnastle-lab.github.io/un-write/
+**v2 live** — https://finnastle-lab.github.io/un-write/
 
-Cleanly-detectable tells (regex/string), the exclusion gate, colour-coded inline highlights, click/hover notes in FA's voice, and the transparent score with visible working. Clean human prose scores ~0, AI slop pegs 100. See [`docs/SCOPE.md`](docs/SCOPE.md) for the full phased plan.
+- **v1** — cleanly-detectable tells (regex/string), exclusion gate, colour-coded highlights, hover notes in FA's voice, transparent score.
+- **v2** — structural / rhythm tells via a sentence+paragraph tokenizer: staccato runs, "marching in formation", setup-then-list openers, negation→affirmation, rule-of-three, punchy two-word closers. These carry the durable **weight-3** end of the score.
+- **v3 (scaffolded, inert)** — `src/rules/semantic.ts` is the socket for the semantic layer (teleporting arguments, faux balance, near-miss metaphors). It needs an off-device model, so it's a separate opt-in layer and does nothing until a deep pass is wired.
 
-Next: **v2** — structural tells (sentence-length variance, staccato runs, rule-of-three, all-fragment lists) via a tokenizer, feeding the durable (weight-3) end of the score.
+Clean human prose scores ~0; AI slop pegs 100; structural tells move it hardest.
+
+Theme toggle (light/dark, persisted) swaps the cloud mark, the yin-yang flourish, and the FA signature stamp. See [`docs/SCOPE.md`](docs/SCOPE.md) for the phased plan.
 
 ### How the engine is laid out
 
-- `src/rules/` — one file per tell category (`punctuation`, `phrases`, `transitions`, `vocab`), each exporting `Rule[]`. `index.ts` runs them, `exclusions.ts` is the do-not-flag gate + overlap resolver. Hot-swappable by design — the ruleset decays.
+- `src/rules/` — one file per tell category (`structure`, `punctuation`, `phrases`, `transitions`, `vocab`), each exporting `Rule[]`; `semantic.ts` is the v3 layer. `index.ts` layers them, `exclusions.ts` is the do-not-flag gate + overlap resolver, `tokenize.ts` is the shared sentence/paragraph splitter with offsets. Hot-swappable by design — the ruleset decays.
 - `src/score.ts` — transparent score; every tuning knob is in `SCORE_CONFIG`.
 - `src/editorExtensions.ts` — CodeMirror 6 decorations + hover tooltip. Highlights ride on top of plain text; they never enter the document model.
+- `src/useTheme.ts` — light/dark toggle, overrides system, persisted.
 
 ## Docs
 

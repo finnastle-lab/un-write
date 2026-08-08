@@ -1,4 +1,5 @@
 import type { Category, Match } from "./rules";
+import { sentenceSpans } from "./rules/tokenize";
 
 // --- text stats -----------------------------------------------------------
 
@@ -7,13 +8,9 @@ export function wordCount(text: string): number {
   return t ? t.split(/\s+/).length : 0;
 }
 
-/** Naive sentence split — good enough for length variance. */
+/** Sentence word-counts, from the shared tokeniser. */
 export function sentenceLengths(text: string): number[] {
-  const sentences = text.match(/[^.!?]+[.!?]+|\S[^.!?]*$/g) ?? [];
-  return sentences
-    .map((s) => s.trim())
-    .filter(Boolean)
-    .map((s) => s.split(/\s+/).length);
+  return sentenceSpans(text).map((s) => s.words);
 }
 
 /** Coefficient of variation of sentence lengths. High = varied = human. */
@@ -56,7 +53,13 @@ export interface ScoreBreakdown {
 export function score(text: string, matches: Match[]): ScoreBreakdown {
   const words = wordCount(text);
   const cv = coeffVar(sentenceLengths(text));
-  const byCategory = { punctuation: 0, phrase: 0, transition: 0, vocab: 0 };
+  const byCategory: Record<Category, number> = {
+    structure: 0,
+    punctuation: 0,
+    phrase: 0,
+    transition: 0,
+    vocab: 0,
+  };
   for (const m of matches) byCategory[m.category]++;
 
   const c = SCORE_CONFIG;

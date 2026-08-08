@@ -4,16 +4,22 @@ import { punctuation } from "./punctuation";
 import { phrases } from "./phrases";
 import { transitions } from "./transitions";
 import { vocab } from "./vocab";
+import { structure } from "./structure";
+import { semantic } from "./semantic"; // v3 layer — inert until a deep pass is wired
 import { applyExclusions, resolveOverlaps } from "./exclusions";
 
 /** The live ruleset. Hot-swappable — it decays, so it's meant to be edited. */
-export const RULESET_VERSION = "v1.2026.08";
+export const RULESET_VERSION = "v2.2026.08";
 
+// Layered: local, instant rules first (v1 surface + v2 structural), then the
+// v3 semantic layer, which is empty until an opt-in deep pass plugs in.
 export const rules: Rule[] = [
+  ...structure,
   ...punctuation,
   ...phrases,
   ...transitions,
   ...vocab,
+  ...semantic,
 ];
 
 /** Run every rule, apply the exclusion gate, resolve overlaps. */

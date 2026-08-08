@@ -2,7 +2,12 @@
 // durable and weigh most; vocabulary decays and weighs least) and a colour
 // used by both the editor decorations and the legend.
 
-export type Category = "punctuation" | "phrase" | "transition" | "vocab";
+export type Category =
+  | "structure"
+  | "punctuation"
+  | "phrase"
+  | "transition"
+  | "vocab";
 
 export interface RawSpan {
   from: number;
@@ -33,7 +38,8 @@ export const CATEGORY_META: Record<
   Category,
   { label: string; weight: number; color: string }
 > = {
-  // structural (v2) will slot in at weight 3 — the durable tells
+  // structural tells are the durable ones — weighted hardest
+  structure: { label: "structure / rhythm", weight: 3, color: "#bd4d86" },
   transition: { label: "transition / hedge", weight: 1.5, color: "#2f7dc0" },
   phrase: { label: "manufactured phrase", weight: 1.5, color: "#8a5cc4" },
   punctuation: { label: "punctuation", weight: 1, color: "#c0432f" },
