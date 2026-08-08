@@ -77,17 +77,29 @@ body {
 
 .score {
   grid-area: score;
-  width: 220px;
+  width: 264px;
   padding: 28px 24px;
   border-left: 1px solid var(--line);
-  text-align: right;
 }
 
 .score-number {
-  font-size: 56px;
+  font-size: 64px;
   font-weight: 300;
   line-height: 1;
   color: var(--muted);
+  transition: color 0.3s ease;
+}
+.score-number[data-band="clean"] {
+  color: var(--muted);
+}
+.score-number[data-band="low"] {
+  color: #2f9e6f;
+}
+.score-number[data-band="mid"] {
+  color: #c98a2f;
+}
+.score-number[data-band="high"] {
+  color: #c0432f;
 }
 
 .score-label {
@@ -98,10 +110,124 @@ body {
   color: var(--muted);
 }
 
-.score-meta {
-  margin-top: 14px;
+.score-verdict {
+  margin-top: 8px;
+  font-size: 13px;
+  font-style: italic;
+  color: var(--ink);
+}
+
+.legend {
+  list-style: none;
+  margin: 22px 0 0;
+  padding: 18px 0 0;
+  border-top: 1px solid var(--line);
+}
+.legend li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  padding: 3px 0;
+  color: var(--ink);
+}
+.legend-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
+  flex: none;
+}
+.legend-label {
+  flex: 1;
+}
+.legend-count {
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.working {
+  margin-top: 20px;
   font-size: 12px;
   color: var(--muted);
+}
+.working summary {
+  cursor: pointer;
+  user-select: none;
+}
+.working dl {
+  margin: 12px 0 0;
+}
+.working dl > div {
+  display: flex;
+  justify-content: space-between;
+  padding: 2px 0;
+}
+.working dt {
+  color: var(--muted);
+}
+.working dd {
+  margin: 0;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.working-note {
+  margin: 12px 0 0;
+  line-height: 1.5;
+}
+
+/* --- tell decorations --------------------------------------------------- */
+.tell {
+  border-radius: 2px;
+  padding-bottom: 1px;
+  box-shadow: inset 0 -2px 0 0 currentColor;
+  cursor: help;
+}
+.tell-punctuation {
+  color: #c0432f;
+  background: color-mix(in srgb, #c0432f 12%, transparent);
+}
+.tell-phrase {
+  color: #8a5cc4;
+  background: color-mix(in srgb, #8a5cc4 14%, transparent);
+}
+.tell-transition {
+  color: #2f7dc0;
+  background: color-mix(in srgb, #2f7dc0 14%, transparent);
+}
+.tell-vocab {
+  color: #2f9e6f;
+  background: color-mix(in srgb, #2f9e6f 14%, transparent);
+}
+/* the highlighted text itself stays the ink colour; only the underline carries
+   the category hue */
+.cm-content .tell {
+  color: var(--ink);
+}
+
+/* --- tooltip ------------------------------------------------------------ */
+.cm-tooltip.cm-tooltip-hover {
+  border: none;
+  background: none;
+}
+.tell-tooltip {
+  max-width: 300px;
+  padding: 12px 14px;
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: 8px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.28);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+.tell-tooltip-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.7;
+  margin-bottom: 5px;
+}
+.tell-tooltip-note {
+  font-size: 13.5px;
+  line-height: 1.5;
 }
 
 .admission {
@@ -126,13 +252,9 @@ body {
     width: auto;
     border-left: none;
     border-bottom: 1px solid var(--line);
-    text-align: left;
-    display: flex;
-    align-items: baseline;
-    gap: 12px;
     padding: 16px 28px;
   }
   .score-number {
-    font-size: 32px;
+    font-size: 44px;
   }
 }
