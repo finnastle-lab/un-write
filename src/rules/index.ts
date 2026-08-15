@@ -5,6 +5,7 @@ import { phrases } from "./phrases";
 import { transitions } from "./transitions";
 import { vocab } from "./vocab";
 import { structure } from "./structure";
+import { figurative } from "./figurative"; // v2.1 — the literary register
 import { semantic } from "./semantic"; // v3 layer — inert until a deep pass is wired
 import { applyExclusions, resolveOverlaps } from "./exclusions";
 
@@ -15,6 +16,7 @@ export const RULESET_VERSION = "v2.2026.08";
 // v3 semantic layer, which is empty until an opt-in deep pass plugs in.
 export const rules: Rule[] = [
   ...structure,
+  ...figurative,
   ...punctuation,
   ...phrases,
   ...transitions,

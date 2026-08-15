@@ -56,6 +56,7 @@ export function score(text: string, matches: Match[]): ScoreBreakdown {
   const byCategory: Record<Category, number> = {
     semantic: 0,
     structure: 0,
+    figurative: 0,
     punctuation: 0,
     phrase: 0,
     transition: 0,

@@ -5,6 +5,7 @@
 export type Category =
   | "semantic"
   | "structure"
+  | "figurative"
   | "punctuation"
   | "phrase"
   | "transition"
@@ -43,6 +44,9 @@ export const CATEGORY_META: Record<
   semantic: { label: "semantic (deep pass)", weight: 3, color: "#6366d1" },
   // structural tells are the durable ones — weighted hardest
   structure: { label: "structure / rhythm", weight: 3, color: "#bd4d86" },
+  // the literary register: purple prose, stoic personification, off-the-shelf
+  // simile. The model's "creative writing" voice. Durable-ish, so weight-2.
+  figurative: { label: "figurative / register", weight: 2, color: "#c8862f" },
   transition: { label: "transition / hedge", weight: 1.5, color: "#2f7dc0" },
   phrase: { label: "manufactured phrase", weight: 1.5, color: "#8a5cc4" },
   punctuation: { label: "punctuation", weight: 1, color: "#c0432f" },
