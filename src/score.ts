@@ -54,7 +54,6 @@ export function score(text: string, matches: Match[]): ScoreBreakdown {
   const words = wordCount(text);
   const cv = coeffVar(sentenceLengths(text));
   const byCategory: Record<Category, number> = {
-    semantic: 0,
     structure: 0,
     figurative: 0,
     punctuation: 0,
