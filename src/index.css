@@ -173,6 +173,34 @@ body {
   color: var(--ink);
 }
 
+.score-voice {
+  margin-top: 18px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+}
+.score-voice .voice-tag {
+  display: block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--muted);
+}
+.score-voice .voice-label {
+  display: block;
+  margin-top: 2px;
+  font-size: 16px;
+  color: var(--accent);
+}
+.score-voice .voice-blurb {
+  margin: 6px 0 0;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
 .legend {
   list-style: none;
   margin: 22px 0 0;

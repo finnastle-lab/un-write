@@ -9,6 +9,7 @@ import {
   RULESET_VERSION,
 } from "./rules";
 import { score } from "./score";
+import { classifyVoice } from "./voice";
 import { useTheme } from "./useTheme";
 import { DeepPassError, runDeepPass } from "./deepPass";
 import cloud from "./assets/cloud.png";
@@ -90,6 +91,7 @@ export default function App() {
     [localMatches, deepMatches],
   );
   const result = useMemo(() => score(doc, matches), [doc, matches]);
+  const voice = useMemo(() => classifyVoice(matches), [matches]);
   const hasText = result.words > 0;
   const signature = theme === "dark" ? signatureWhite : signatureBlack;
 
@@ -123,6 +125,16 @@ export default function App() {
         </div>
         <div className="score-label">how AI does this read</div>
         <div className="score-verdict">{verdict(result.score, hasText)}</div>
+
+        {hasText && voice && (
+          <div className="score-voice">
+            <span className="voice-tag">
+              {voice.confidence === "clear" ? "sounds like" : "faint whiff of"}
+            </span>
+            <strong className="voice-label">{voice.label}</strong>
+            <p className="voice-blurb">{voice.blurb}</p>
+          </div>
+        )}
 
         <ul className="legend">
           {CATEGORIES.map((c) => (
