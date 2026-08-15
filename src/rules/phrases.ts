@@ -63,6 +63,19 @@ export const phrases: Rule[] = [
       spans(t, /\bthe (?:part|bit|thing) (?:worth|to) (?:pausing on|noting|watch)\b|\bthe (?:finding|point) (?:underneath|beneath) the\b/gi),
   },
 
+  // --- faux-balance / the non-decision -----------------------------------
+  {
+    id: "faux-balance",
+    label: "flagging, not picking",
+    category: "phrase",
+    note: "\"Both are valid. Flagging rather than picking.\" Two options named, neither weighed, the decision slid back across the table to you. It performs even-handedness to dodge the risk of a view. Fence-sitting in a nice coat. Pick one.",
+    detect: (t) =>
+      spans(
+        t,
+        /\b(?:flagging|surfacing|noting|raising) (?:(?:it|this) )?(?:rather than|not|over|instead of) (?:picking|choosing|deciding|prescribing)\b|\b(?:for you to decide|your call to make|leaving (?:it|this) (?:to you|open)|you'?ll (?:want to |need to )?decide)\b|\bthe (?:honest|real|two|main) (?:options|choices|paths|tradeoffs?) (?:here )?(?:are|is)\b|\bboth (?:are|options are|approaches are|have merit|are valid|are defensible)\b|\bthere'?s a (?:case|argument) (?:to be made )?for both\b/gi,
+      ),
+  },
+
   // --- announcing --------------------------------------------------------
   {
     id: "announcing-good-part",

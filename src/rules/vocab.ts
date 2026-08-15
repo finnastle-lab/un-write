@@ -55,6 +55,28 @@ export const vocab: Rule[] = [
     detect: (t) => spans(t, wordList(["delve", "quietly", "seamlessly weave"])),
   },
   {
+    id: "pathetic-fallacy",
+    label: "pathetic fallacy",
+    category: "vocab",
+    note: "surrender, weep, yield, endure, cling, defy. The weather handed the inner life of a stoic war widow. One is a fine image; a whole hillside of brave little shrubs is the machine going for the lump in your throat. Let the hill just be a hill.",
+    detect: (t) =>
+      spans(
+        t,
+        wordList([
+          "surrender", "surrendered", "surrenders", "surrendering",
+          "weep", "weeps", "weeping", "wept",
+          "yield", "yields", "yielded", "yielding",
+          "refuse", "refuses", "refused", "refusing",
+          "cling", "clings", "clung", "clinging",
+          "defy", "defies", "defied", "defying",
+          "hoard", "hoards", "hoarded", "hoarding",
+          "endure", "endures", "endured", "enduring",
+          "brave", "braved", "braving",
+          "held their ground", "hold their ground",
+        ]),
+      ),
+  },
+  {
     id: "vocab-hype-nouns",
     label: "hype noun",
     category: "vocab",
