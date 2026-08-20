@@ -99,11 +99,24 @@ function leaveOneOutAccuracy(rawRows: number[][], yIdx: number[]): number {
   return correct / rawRows.length;
 }
 
+/** Counts by house and by real/synthetic split — printed so a v0→v1 corpus
+ *  swap is visible in the training log, not just claimed in prose. */
+function sourceCounts(): Record<string, { real: number; synthetic: number }> {
+  const out: Record<string, { real: number; synthetic: number }> = {};
+  for (const c of CLASSES) out[c] = { real: 0, synthetic: 0 };
+  for (const s of CORPUS) out[s.house][s.source]++;
+  return out;
+}
+
 function main() {
   const rawRows = CORPUS.map((s) => extractFeatures(s.text).values);
   const yIdx = CORPUS.map((s) => CLASSES.indexOf(s.house));
 
   console.log(`Training on ${CORPUS.length} samples, ${rawRows[0].length} features, ${CLASSES.length} classes.`);
+  const counts = sourceCounts();
+  for (const c of CLASSES) {
+    console.log(`  ${c}: ${counts[c].real} real, ${counts[c].synthetic} synthetic`);
+  }
 
   const loo = leaveOneOutAccuracy(rawRows, yIdx);
   console.log(`Leave-one-out accuracy: ${(loo * 100).toFixed(1)}%`);
@@ -112,8 +125,9 @@ function main() {
   const { weights, bias } = trainLogReg(x, yIdx, CLASSES.length);
 
   const out = {
-    version: "v0-synthetic-2026.08",
+    version: "v1-mixed-2026.08",
     trainedOn: CORPUS.length,
+    sourceCounts: counts,
     leaveOneOutAccuracy: Math.round(loo * 1000) / 1000,
     classes: CLASSES,
     featureNames: FEATURE_NAMES,
