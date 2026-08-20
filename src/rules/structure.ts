@@ -45,6 +45,61 @@ function marching(text: string): RawSpan[] {
   return out;
 }
 
+// Small stopword set for the topic-sentence-overlap heuristics below — enough
+// to keep "the" and "and" from inflating a match, not a full list.
+const STOP = new Set([
+  "the", "a", "an", "and", "or", "but", "of", "in", "on", "at", "to", "for",
+  "with", "is", "are", "was", "were", "be", "been", "being", "it", "its",
+  "this", "that", "these", "those", "as", "by", "from", "into", "not", "so",
+  "than", "then", "there", "their", "they", "we", "you", "your", "our",
+]);
+
+function keywords(s: string): Set<string> {
+  return new Set(
+    s
+      .toLowerCase()
+      .match(/[a-z']{4,}/g)
+      ?.filter((w) => !STOP.has(w)) ?? [],
+  );
+}
+
+/** Overlap coefficient: shared keywords / smaller set size. */
+function overlap(a: Set<string>, b: Set<string>): number {
+  if (a.size === 0 || b.size === 0) return 0;
+  let shared = 0;
+  for (const w of a) if (b.has(w)) shared++;
+  return shared / Math.min(a.size, b.size);
+}
+
+/** A paragraph whose closing sentence restates its own opening sentence — the
+ *  circular "repeat the premise as the conclusion" habit. Needs both
+ *  sentences to carry real content (3+ keywords) so short paragraphs don't
+ *  trip it on a shared name or two. */
+function topicRestatement(text: string): RawSpan[] {
+  const out: RawSpan[] = [];
+  for (const p of paragraphSpans(text)) {
+    if (p.sentences.length < 3) continue;
+    const first = keywords(p.sentences[0].text);
+    const last = keywords(p.sentences[p.sentences.length - 1].text);
+    if (first.size < 3 || last.size < 3) continue;
+    if (overlap(first, last) >= 0.5) out.push({ from: p.from, to: p.to });
+  }
+  return out;
+}
+
+/** The whole piece's closing sentence mechanically calling back to its
+ *  opening line — a stronger, rarer version of the paragraph-level tell
+ *  above, so it needs a higher bar and more of the document to judge. */
+function tooTidyCallback(text: string): RawSpan[] {
+  const sents = sentenceSpans(text);
+  if (sents.length < 6) return [];
+  const first = keywords(sents[0].text);
+  const last = keywords(sents[sents.length - 1].text);
+  if (first.size < 4 || last.size < 4) return [];
+  if (overlap(first, last) < 0.6) return [];
+  return [{ from: sents[sents.length - 1].from, to: sents[sents.length - 1].to }];
+}
+
 export const structure: Rule[] = [
   {
     id: "staccato",
@@ -102,5 +157,20 @@ export const structure: Rule[] = [
     note: "Three parallel beats in a row — tripled adjectives, tripled clauses. Once, it lands. As a habit it's a crutch, and the machine leans on it hard. (A nudge to check, not a verdict — real lists are fine.)",
     detect: (t) =>
       spans(t, /\b([a-z]{3,}), ([a-z]{3,}),? and ([a-z]{3,})\b/gi),
+  },
+  {
+    id: "topic-restatement",
+    label: "structural redundancy",
+    category: "structure",
+    note: "The paragraph's last sentence is its first sentence again, dressed differently. Restating the premise isn't the same as concluding it. Say something new or stop.",
+    detect: topicRestatement,
+  },
+  {
+    id: "too-tidy-callback",
+    label: "too-tidy callback",
+    category: "structure",
+    weight: 2,
+    note: "The last line loops back to the opening line, word for word almost. Neat, and that's the problem — real endings don't usually know where they started.",
+    detect: tooTidyCallback,
   },
 ];

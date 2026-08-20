@@ -120,6 +120,41 @@ export const phrases: Rule[] = [
       spans(t, /\b(?:what do you think\??|sound familiar\??|want to go deeper\??|does (?:this|that) resonate\??|dm me(?: for more)?)\b/gi),
   },
 
+  // --- superficial depth --------------------------------------------------
+  {
+    id: "superficial-ing",
+    label: "superficial -ing clause",
+    category: "phrase",
+    note: "\"...reflecting the growing importance of...\" \"...highlighting the need for...\" A weak analytical clause tacked on the end to mimic depth. Cut it — the sentence in front of it was already the point.",
+    detect: (t) =>
+      spans(
+        t,
+        /\b(?:reflecting|highlighting|underscoring|underlining|emphasi[sz]ing|demonstrating|signal(?:l)?ing|illustrating)\s+(?:the\s+)?(?:(?:growing|broader|increasing|critical|vital|pivotal)\s+)?(?:importance|need|role|significance|shift|impact)\s+(?:of|for|toward|towards|in)\b/gi,
+      ),
+  },
+  {
+    id: "structure-narration",
+    label: "structure narration",
+    category: "phrase",
+    note: "\"Taking those in order.\" \"Answering the first part first.\" Narrating the shape of the answer instead of just giving it. Nobody talks about their own paragraph structure out loud.",
+    detect: (t) =>
+      spans(
+        t,
+        /\b(?:taking (?:those|these) in (?:order|turn)|answering the first (?:part|question) first|to take (?:those|these) in turn|starting with the first(?: one)?)\b/gi,
+      ),
+  },
+  {
+    id: "false-range",
+    label: "false range",
+    category: "phrase",
+    note: "\"Everything from phishing to BEC.\" Two adjacent, narrow things dressed up as a broad spectrum. Name the two things — the \"everything from\" is doing work the facts don't back up.",
+    detect: (t) =>
+      spans(
+        t,
+        /\b(?:everything|anything|ranging|ranges|spans|spanning)\s+from\s+[a-z][\w\s-]{1,25}\s+to\s+[a-z][\w\s-]{1,25}\b/gi,
+      ),
+  },
+
   // --- vendor / cliché openers -------------------------------------------
   {
     id: "vendor-opener",

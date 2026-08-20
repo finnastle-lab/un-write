@@ -9,7 +9,7 @@ import { figurative } from "./figurative"; // v2.1 — the literary register
 import { applyExclusions, resolveOverlaps } from "./exclusions";
 
 /** The live ruleset. Hot-swappable — it decays, so it's meant to be edited. */
-export const RULESET_VERSION = "v2.2026.08";
+export const RULESET_VERSION = "v3.2026.08";
 
 // Layered: local, instant rules — v1 surface, v2 structural, v2.1 literary.
 // Everything runs client-side; no text ever leaves the browser.

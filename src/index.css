@@ -1,32 +1,85 @@
+/* fa-design-system typefaces, self-hosted (see docs/SCOPE-v3.md §2.3) */
+@font-face {
+  font-family: "InterFA";
+  src: url("./assets/fonts/InterFA-400-normal.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "InterFA";
+  src: url("./assets/fonts/InterFA-600-normal.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Instrument Serif";
+  src: url("./assets/fonts/InstrumentSerif-400-normal.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Instrument Serif";
+  src: url("./assets/fonts/InstrumentSerif-400-italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Cousine";
+  src: url("./assets/fonts/Cousine-400-normal.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Cousine";
+  src: url("./assets/fonts/Cousine-700-normal.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
-  --paper: #faf8f4;
-  --surface: #f0ede6; /* boxes sit a shade off the page so they read as boxes */
-  --ink: #1c1a17;
-  --muted: #8a8378;
-  --line: #dcd6cb; /* light-gray hairline */
-  --accent: #b4531f;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --paper: #faf9f6;
+  --surface: #ffffff; /* fa-design-system "card" — cards read lighter than the page, not darker */
+  --ink: #0f0f0e;
+  --muted: #6f6b63; /* fa-design-system "ink-2" */
+  --line: #e6e3db;
+  --line-strong: #d3cfc5;
+  --accent: #d9360f;
+  --accent-press: #a82908;
+  --sans: "InterFA", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --serif: "Instrument Serif", Georgia, "Times New Roman", serif;
+  --mono: "Cousine", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  font-family: var(--sans);
 }
 
 /* dark palette — applied when the toggle picks dark, or by system default
    until the toggle has spoken (React stamps data-theme on <html> after mount) */
 :root[data-theme="dark"] {
-  --paper: #17150f;
-  --surface: #211e17;
-  --ink: #ece7dd;
-  --muted: #8f887b;
-  --line: #2c2921;
-  --accent: #e08a4f;
+  --paper: #121211;
+  --surface: #171716;
+  --ink: #eeece6;
+  --muted: #a29d94;
+  --line: #2c2b27;
+  --line-strong: #3a3934;
+  --accent: #e5451a;
+  --accent-press: #f0673d;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --paper: #17150f;
-    --surface: #211e17;
-    --ink: #ece7dd;
-    --muted: #8f887b;
-    --line: #2c2921;
-    --accent: #e08a4f;
+    --paper: #121211;
+    --surface: #171716;
+    --ink: #eeece6;
+    --muted: #a29d94;
+    --line: #2c2b27;
+    --line-strong: #3a3934;
+    --accent: #e5451a;
+    --accent-press: #f0673d;
   }
 }
 
@@ -90,6 +143,39 @@ body {
   }
 }
 
+.chrome-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.view-toggle {
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--surface);
+}
+.view-toggle button {
+  border: none;
+  background: none;
+  color: var(--muted);
+  font-size: 13px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+.view-toggle button:hover {
+  color: var(--ink);
+}
+.view-toggle button[data-active="true"] {
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
 .theme-toggle {
   flex: none;
   display: grid;
@@ -110,8 +196,9 @@ body {
 
 .wordmark {
   margin: 0;
-  font-size: 20px;
-  font-weight: 600;
+  font-family: var(--serif);
+  font-size: 24px;
+  font-weight: 400;
   letter-spacing: -0.01em;
 }
 
@@ -139,8 +226,9 @@ body {
 }
 
 .score-number {
-  font-size: 64px;
-  font-weight: 300;
+  font-family: var(--serif);
+  font-size: 68px;
+  font-weight: 400;
   line-height: 1;
   color: var(--muted);
   transition: color 0.3s ease;
@@ -308,7 +396,7 @@ body {
   color: var(--paper);
   border-radius: 8px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.28);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: var(--sans);
 }
 .tell-tooltip-label {
   font-size: 11px;
@@ -367,6 +455,186 @@ body {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--muted);
+}
+
+/* --- "how it's identified" view ----------------------------------------- */
+.pane-identify {
+  grid-column: 1 / -1;
+  overflow: auto;
+}
+
+.identify {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 32px 8px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.identify-section h2 {
+  margin: 0 0 10px;
+  font-family: var(--serif);
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.identify-honesty {
+  margin: 0 0 18px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--muted);
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface);
+}
+.identify-honesty strong {
+  color: var(--ink);
+}
+
+.identify-empty {
+  font-size: 14px;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.house-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.house-bar-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+.house-bar-pct {
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.house-bar-track {
+  height: 8px;
+  border-radius: 4px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+.house-bar-fill {
+  height: 100%;
+  background: var(--muted);
+  transition: width 0.3s ease;
+}
+.house-bar-fill[data-best="true"] {
+  background: var(--accent);
+}
+
+.identify-verdict {
+  margin: 16px 0 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.identify-evidence {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+.identify-evidence h3 {
+  margin: 0 0 10px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+.identify-evidence ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.identify-evidence li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+.identify-evidence-count {
+  margin-left: auto;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.survival-text {
+  font-family: var(--serif);
+  font-size: 19px;
+  line-height: 1.8;
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  margin-bottom: 16px;
+}
+.survival-surviving {
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+.survival-faded {
+  opacity: 0.4;
+}
+
+.survival-slider {
+  width: 100%;
+  accent-color: var(--accent);
+}
+.survival-levels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 6px;
+}
+.survival-levels span[data-active="true"] {
+  color: var(--accent);
+  font-weight: 600;
+}
+.survival-readout {
+  margin: 14px 0 16px;
+  font-size: 14px;
+}
+
+.shadow-key-demo {
+  font-family: var(--mono);
+  font-size: 14px;
+  line-height: 1.9;
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+}
+.shadow-token-green {
+  background: color-mix(in srgb, #2f9e6f 20%, transparent);
+  color: var(--ink);
+  border-radius: 2px;
+}
+.shadow-token-red {
+  background: color-mix(in srgb, #c0432f 16%, transparent);
+  color: var(--ink);
+  border-radius: 2px;
+}
+.shadow-key-legend {
+  margin: 12px 0 0;
+  font-size: 12px;
+  color: var(--muted);
+}
+.shadow-key-legend .shadow-token-green,
+.shadow-key-legend .shadow-token-red {
+  padding: 1px 5px;
 }
 
 @media (max-width: 720px) {

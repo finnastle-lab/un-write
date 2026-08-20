@@ -77,6 +77,13 @@ export const vocab: Rule[] = [
       ),
   },
   {
+    id: "vocab-poison-words",
+    label: "poison word",
+    category: "vocab",
+    note: "tapestry, pivotal, vibrant. The three words every watchlist since 2023 leads with, because the model still can't quit them. Decays fast — the next version drops these and finds three new ones — but right now they're a giveaway.",
+    detect: (t) => spans(t, wordList(["tapestry", "pivotal", "vibrant"])),
+  },
+  {
     id: "vocab-hype-nouns",
     label: "hype noun",
     category: "vocab",

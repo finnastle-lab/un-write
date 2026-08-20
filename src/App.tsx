@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import Editor from "./Editor";
+import AttributionView from "./AttributionView";
 import {
   analyse,
   CATEGORY_META,
@@ -28,6 +29,7 @@ function verdict(n: number, hasText: boolean): string {
 
 export default function App() {
   const [doc, setDoc] = useState("");
+  const [view, setView] = useState<"editor" | "identify">("editor");
   const [theme, toggleTheme] = useTheme();
 
   const matches = useMemo(() => analyse(doc), [doc]);
@@ -46,80 +48,108 @@ export default function App() {
             <p className="tagline">Detection, obsolete by design.</p>
           </div>
         </div>
-        <button
-          className="theme-toggle"
-          onClick={toggleTheme}
-          aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
-          title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
-        >
-          {theme === "dark" ? <SunIcon /> : <MoonIcon />}
-        </button>
+        <div className="chrome-controls">
+          <div className="view-toggle" role="tablist" aria-label="View">
+            <button
+              role="tab"
+              aria-selected={view === "editor"}
+              data-active={view === "editor"}
+              onClick={() => setView("editor")}
+            >
+              Editor
+            </button>
+            <button
+              role="tab"
+              aria-selected={view === "identify"}
+              data-active={view === "identify"}
+              onClick={() => setView("identify")}
+            >
+              How it's identified
+            </button>
+          </div>
+          <button
+            className="theme-toggle"
+            onClick={toggleTheme}
+            aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+            title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+          >
+            {theme === "dark" ? <SunIcon /> : <MoonIcon />}
+          </button>
+        </div>
       </header>
 
-      <main className="pane">
-        <Editor matches={matches} onChange={setDoc} />
-      </main>
+      {view === "editor" ? (
+        <main className="pane">
+          <Editor initialDoc={doc} matches={matches} onChange={setDoc} />
+        </main>
+      ) : (
+        <main className="pane pane-identify">
+          <AttributionView doc={doc} />
+        </main>
+      )}
 
-      <aside className="score" aria-label="score">
-        <div className="score-number" data-band={band(result.score, hasText)}>
-          {hasText ? result.score : "—"}
-        </div>
-        <div className="score-label">how AI does this read</div>
-        <div className="score-verdict">{verdict(result.score, hasText)}</div>
-
-        {hasText && voice && (
-          <div className="score-voice">
-            <span className="voice-tag">
-              {voice.confidence === "clear" ? "sounds like" : "faint whiff of"}
-            </span>
-            <strong className="voice-label">{voice.label}</strong>
-            <p className="voice-blurb">{voice.blurb}</p>
+      {view === "editor" && (
+        <aside className="score" aria-label="score">
+          <div className="score-number" data-band={band(result.score, hasText)}>
+            {hasText ? result.score : "—"}
           </div>
-        )}
+          <div className="score-label">how AI does this read</div>
+          <div className="score-verdict">{verdict(result.score, hasText)}</div>
 
-        <ul className="legend">
-          {CATEGORIES.map((c) => (
-            <li key={c}>
-              <span
-                className="legend-dot"
-                style={{ background: CATEGORY_META[c].color }}
-              />
-              <span className="legend-label">{CATEGORY_META[c].label}</span>
-              <span className="legend-count">{result.byCategory[c]}</span>
-            </li>
-          ))}
-        </ul>
+          {hasText && voice && (
+            <div className="score-voice">
+              <span className="voice-tag">
+                {voice.confidence === "clear" ? "sounds like" : "faint whiff of"}
+              </span>
+              <strong className="voice-label">{voice.label}</strong>
+              <p className="voice-blurb">{voice.blurb}</p>
+            </div>
+          )}
 
-        <details className="working">
-          <summary>show the working</summary>
-          <dl>
-            <div>
-              <dt>words</dt>
-              <dd>{result.words}</dd>
-            </div>
-            <div>
-              <dt>flags</dt>
-              <dd>{result.flagCount}</dd>
-            </div>
-            <div>
-              <dt>weighted / 100w</dt>
-              <dd>{result.flagLoad}</dd>
-            </div>
-            <div>
-              <dt>sentence variance</dt>
-              <dd>{result.cv}</dd>
-            </div>
-            <div>
-              <dt>uniformity penalty</dt>
-              <dd>+{result.varPenalty}</dd>
-            </div>
-          </dl>
-          <p className="working-note">
-            Structural spread is weighted over vocabulary — words decay every
-            model release, rhythm doesn't. Ruleset {RULESET_VERSION}.
-          </p>
-        </details>
-      </aside>
+          <ul className="legend">
+            {CATEGORIES.map((c) => (
+              <li key={c}>
+                <span
+                  className="legend-dot"
+                  style={{ background: CATEGORY_META[c].color }}
+                />
+                <span className="legend-label">{CATEGORY_META[c].label}</span>
+                <span className="legend-count">{result.byCategory[c]}</span>
+              </li>
+            ))}
+          </ul>
+
+          <details className="working">
+            <summary>show the working</summary>
+            <dl>
+              <div>
+                <dt>words</dt>
+                <dd>{result.words}</dd>
+              </div>
+              <div>
+                <dt>flags</dt>
+                <dd>{result.flagCount}</dd>
+              </div>
+              <div>
+                <dt>weighted / 100w</dt>
+                <dd>{result.flagLoad}</dd>
+              </div>
+              <div>
+                <dt>sentence variance</dt>
+                <dd>{result.cv}</dd>
+              </div>
+              <div>
+                <dt>uniformity penalty</dt>
+                <dd>+{result.varPenalty}</dd>
+              </div>
+            </dl>
+            <p className="working-note">
+              Structural spread is weighted over vocabulary — words decay every
+              model release, rhythm doesn't. Ruleset {RULESET_VERSION}.
+            </p>
+          </details>
+        </aside>
+      )}
 
       <footer className="admission">
         <p>

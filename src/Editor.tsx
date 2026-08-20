@@ -43,7 +43,7 @@ export default function Editor({
         EditorView.theme({
           "&": { height: "100%", fontSize: "17px" },
           ".cm-content": {
-            fontFamily: "'Iowan Old Style', Georgia, 'Times New Roman', serif",
+            fontFamily: "var(--serif)",
             lineHeight: "1.8",
             padding: "24px 8px 40vh",
             maxWidth: "72ch",
