@@ -19,6 +19,9 @@ export interface StylometricProfile {
   burstiness: number;
   emDashPer300: number;
   semicolonPer300: number;
+  /** emoji per 100 words — GPT in particular reaches for emoji as section
+   *  markers (⚡/⛽-style headers) in ways the other houses rarely do */
+  emojiPer100: number;
   /** per-100-words frequency for each tracked function word */
   functionWordFreq: Record<string, number>;
 }
@@ -33,6 +36,7 @@ export function stylometricProfile(text: string): StylometricProfile {
   const burstiness = Math.round(coeffVar(sentenceLengths(text)) * 100) / 100;
   const emDashes = (text.match(/[—–]/g) ?? []).length;
   const semicolons = (text.match(/;/g) ?? []).length;
+  const emojis = (text.match(/\p{Extended_Pictographic}/gu) ?? []).length;
 
   const tokens = text.toLowerCase().match(/[a-z']+/g) ?? [];
   const total = tokens.length || 1;
@@ -50,6 +54,7 @@ export function stylometricProfile(text: string): StylometricProfile {
     burstiness,
     emDashPer300: per300(emDashes, words),
     semicolonPer300: per300(semicolons, words),
+    emojiPer100: words === 0 ? 0 : Math.round(((emojis / words) * 100) * 10) / 10,
     functionWordFreq,
   };
 }

@@ -17,6 +17,7 @@ export const FEATURE_NAMES: string[] = [
   "burstiness",
   "emDashPer300",
   "semicolonPer300",
+  "emojiPer100",
   ...FUNCTION_WORDS.map((w) => `fw:${w}`),
 ];
 
@@ -46,6 +47,7 @@ export function extractFeatures(text: string): FeatureVector {
     style.burstiness,
     style.emDashPer300,
     style.semicolonPer300,
+    style.emojiPer100,
     ...FUNCTION_WORDS.map((w) => style.functionWordFreq[w] ?? 0),
   ];
 
