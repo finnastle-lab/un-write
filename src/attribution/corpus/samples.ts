@@ -676,6 +676,72 @@ export const CORPUS: Sample[] = [
     source: "real",
   },
 
+
+  // -------- REAL: GPT/ChatGPT poems, against src/attribution/corpus/promptsPoems.ts (12/12) --------
+  {
+    house: "openai",
+    text: "The quarry sleeps beneath the hill,\nits broken teeth softened by moss.\n\nRain gathers in the hollow,\ngreen and still,\nholding the sky upside down.\n\nOnce, machines shook these walls.\nNow only wind\nmoves through the rusted silence.\n\nA crow crosses the empty pit,\nblack against stone,\nand disappears.\n\nBy evening,\nthe quarry looks less abandoned\nthan forgotten\u2014\nas if the earth\nhas quietly taken it back.",
+    source: "real",
+  },
+  {
+    house: "openai",
+    text: "For twenty years\nit has stood beside the stove,\nits metal dulled by steam,\nits handle polished by the same hands.\n\nIt remembers mornings\nbefore the children grew tall,\nwinter illnesses,\nlate-night conversations,\nand tea made for one.\n\nIts whistle once announced\nthe beginning of every day.\nNow it takes a little longer,\na low tremor before the boil.\n\nNew appliances have come and gone.\nCabinets have been painted.\nThe clock has stopped twice.\nPeople have left this kitchen\nand returned older.\n\nBut the kettle remains\u2014\n\nscarred, stubborn,\nslightly crooked on its base,\n\nholding, each morning,\nthe small bright promise\nthat water can still become\nsomething warm.",
+    source: "real",
+  },
+  // provenance: user flagged this one as reconstructed from a screenshot, not a direct copy-paste
+  {
+    house: "openai",
+    text: "At forty, you've learned\nthe moment you glance back\nwithout needing to go back.\n\nAhead,\nthe road is still long.\n\nAnd for the first time,\nyou understand\nthat long\nis something to be grateful for.",
+    source: "real",
+  },
+  {
+    house: "openai",
+    text: "At three, the city loosens its tie.\n\nTraffic lights change\nfor nobody,\ngreen to amber to red\nover an empty intersection.\n\nA bus sighs at the curb,\ndoors opening onto the dark,\nthen closes them again.\n\nRain shines on the pavement\nlike the street has been polished\nfor ghosts.\n\nBehind apartment windows,\nsmall squares of insomnia:\na television flickering,\na kitchen light,\nsomeone standing barefoot\nand thinking about tomorrow.\n\nA bottle rolls along the gutter\nand settles beside a drain.\n\nSomewhere, a siren\nthen smaller,\nthen gone.\n\nThe city is still here\u2014\nbut stripped of its voices,\nits bargains,\nits hurry.\n\nFor one hour before dawn\nthe streets belong to no one.\n\nAnd every dark window\nlooks like a held breath.",
+    source: "real",
+  },
+  // provenance: user flagged this one as reconstructed from a screenshot, not a direct copy-paste
+  {
+    house: "openai",
+    text: "You pack the car at dawn,\nyour mother's hands\ntrembling as they fold\nthe last sweater.\n\nThe house shrinks in the mirror.\nNot because you're driving away,\nbut because you're finally\nfar enough to see it whole.\n\nYour key stays on the hook.\nYou don't need it anymore.",
+    source: "real",
+  },
+  // provenance: user flagged this one as reconstructed from a screenshot, not a direct copy-paste
+  {
+    house: "openai",
+    text: "They are alive somewhere\u2014\ndrinking coffee,\nwalking a familiar street,\nexisting in a different time zone.\n\nThis is the strangest grief:\nno funeral,\nno finality,\njust an ocean of hours\nbetween your morning\nand their evening.\n\nYou miss them like a habit,\nlike the way your hand\nstill reaches for the phone\nat 3 p.m.,\ntheir old wake-up time.\n\nThey are alive,\nand still,\nyou are learning how to let them go.",
+    source: "real",
+  },
+  {
+    house: "openai",
+    text: "Ten years of the same corners,\nthe same traffic light that takes forever,\nthe same coffee shop where the barista\nstopped asking your name\nand just started making it.\n\nTen years of muscle memory\u2014\nyour hands know the turns,\nyour eyes know which billboards have faded,\nyour body knows the rhythm\nof this road like a heartbeat.\n\nYou've aged a decade\non this commute.\nChildren were born.\nFriends moved away.\nYou changed jobs, hairstyles, lives.\n\nBut this road\nstayed exactly the same.\n\nAnd somehow,\nthat's comforting.",
+    source: "real",
+  },
+  {
+    house: "openai",
+    text: "Snow falls silently\u2014\nthe world erased overnight,\nwhite and forgiven.\n\nBare branches holding\nnothing but the weight of sky,\npatient, waiting, still.\n\nCold fingers and breath\nthat clouds in the dark morning\u2014\nlife, small and visible.",
+    source: "real",
+  },
+  {
+    house: "openai",
+    text: "Dear Sea,\n\nYou've been here longer than language.\nYou've swallowed ships and secrets,\narguments and wedding rings,\nthe last words of people\nwho thought you were listening.\n\nYou are listening.\n\nYou wear a thousand faces\u2014\nrage and glassiness,\ngrey mornings and sudden blue,\nthe way you look different\ndepending on who is looking.\n\nYou are patient\nin a way humans cannot be.\nYou are ancient\nand indifferent\nand more honest than we deserve.\n\nWhen we stand at your edge,\nsmall and loud,\nyou remind us\nthat the world does not revolve around us.\n\nThank you for that.",
+    source: "real",
+  },
+  {
+    house: "openai",
+    text: "The phone sits on the table,\na small dark oblong of possibility.\n\nYou've checked it seventeen times.\nThe screen is clean.\nNo notifications.\nNo missed calls.\n\nYou knew this already.\nThe silence has weight.\n\nIn this waiting,\nyou are learning\nthat hope and dread\nare the same feeling,\njust wearing different clothes.\n\nYou keep your ringer on,\nthough it won't matter.\n\nSometimes the hardest part\nisn't the not-calling.\nIt's knowing they could,\nand choosing not to.",
+    source: "real",
+  },
+  {
+    house: "openai",
+    text: "The sky darkens like a bruise,\nthe wind arrives with sudden news,\nthe trees begin their frantic dance,\nthe clouds roll in, a gathering stance.\n\nThe air tastes thick and charged and strange,\nas if the world is due to change,\nthen lightning splits the darkened sky,\nand thunder answers with a cry.\n\nThe rain comes down in silver sheets,\nthe storm's relentless, pounding beats,\nand everything we thought was still\nbows down before the wind's great will.",
+    source: "real",
+  },
+  {
+    house: "openai",
+    text: "There's a room at the edge of your mind,\nthe door slightly ajar.\n\nYou remember:\na smell (flowers? rain?),\na voice (familiar? young?),\nthe feeling of being wanted,\nthe color of light through fabric.\n\nBut the details scatter\nlike birds startled from a branch.\n\nYou reach for the thread\nand it dissolves.\n\nYou know this happened\u2014\nyour body remembers it,\nsome deeper part of you\nholds it like a secret.\n\nBut when you try to speak it,\nit becomes vague,\nbecomes general,\nbecomes something that might have happened\nto someone else.\n\nThere's a story here\nyou almost know.\nA name on the tip of your tongue.\nA face you can't quite bring into focus.\n\nAnd you're learning\nthat sometimes the most precious memories\nare the ones that slip away,\nleaving only the feeling\nthat you loved something once,\nand it mattered.",
+    source: "real",
+  },
+
   // ============================== HUMAN ==============================
   // varied burstiness, contractions, concrete specific detail, opinions
   // stated flat, imperfect endings, no hedge-stacking.
