@@ -127,3 +127,26 @@ Recommend shipping **3a first** (it's funnier and honest), offer 3b as the label
 3. **Score drift** — as vocab tells decay, an unversioned score becomes meaningless. Version the ruleset; show it. (§3)
 4. **Voice cost** — dynamic per-instance voice needs an LLM; static hand-authored per-rule notes keep v1 local. Chose static. (§4)
 5. **The owned joke** — the rewriter is the thing it detects. Not a bug; surfaced in UI. (§4)
+
+---
+
+## 8. v3a — the local strip pass
+
+Scopes out §4's "3a — canned/deterministic swaps only" as its own build, ahead of any inline tracked-changes UI. Zero dependencies, no model call, nothing leaves the browser — the same promise as v1/v2, just doing a write instead of a read. Same shape as the "destripper" tools referenced in the brief: character/metadata cleanup → vocabulary lookup → punctuation heuristics, run in that order, deterministic top to bottom.
+
+```
+src/strip.ts          # stripText(text) -> { text, changes, byKind }
+                       # not a Rule — it's a transform, not a detector, so it
+                       # lives beside score.ts/voice.ts, not in src/rules/
+```
+
+**Scope, and just as importantly what's out of it:**
+
+1. **Character/metadata cleanup** — strip zero-width chars (`​ ‌ ‍ ﻿ ⁠`), strip `utm_*`/`fbclid`/`gclid` query params, curly quotes → straight, unwrap `**bold**`, strip leading `#` headings. This is the pass that actually *fixes* what `punctuation.ts`'s `curly-double-quote` and `markdown-artefact` rules only flag.
+2. **Vocabulary substitution** — case-preserving, word-boundary swap table, deliberately narrowed to *single-word, unambiguous* entries: the corporate-verb and buzz-adjective clusters from `vocab.ts` (leverage→use, harness→use, seamless→smooth, robust→solid, …) plus delve→look into. Pathetic-fallacy verbs, hype nouns, and every rule in `phrases.ts`/`transitions.ts` are **excluded on purpose** — those are contextual or multi-word, and a blind swap breaks grammar or drops a clause mid-sentence. Narrower than a 100+-entry table by design; widen only as individual swaps prove safe unattended.
+3. **Punctuation heuristics** — em-dash cap (~1 per 300 words via the existing `wordCount`, overflow replaced with `", "`), exclamation → period, semicolon → period + recapitalise, mid-sentence colon → period + recapitalise (fires only on lowercase-continuation clauses, so `3:30`, `Note: Foo`, ratios and labels are untouched by construction, not by a special-cased exclusion list).
+4. **Burstiness stays advisory, not rewritten.** This is the one place the brief's own diagram and §7.1's "fight" collide: detecting a flat cadence is cheap (already live — `coeffVar` in `score.ts`, `staccato`/`marching` in `structure.ts`); *fixing* it means deciding how to split or merge a sentence without breaking what it says, which is a judgment call the local pass doesn't get to make. Splitting the pass here — mechanical swaps applied, rhythm only ever flagged — keeps the whole thing honest about the same ceiling §7.1 already names: you can detect tells locally, you can't safely rewrite structure locally.
+
+**Wiring:** `Editor.tsx` has no way to push text in from outside once mounted — `App.tsx` only sets `initialDoc` once, at construction. Needs `forwardRef` + `useImperativeHandle` exposing `setText(text)`, dispatching a full-document CM6 transaction. A "strip" control in the `aside.score` panel calls `stripText(doc)` and pushes the result through that ref; `onChange` already fires on any `docChanged` dispatch, so `App`'s `doc` state (and `analyse`/`score` off the back of it) updates for free — no second state-sync path to maintain.
+
+**Ceiling, stated up front:** this pass is tuned against perplexity-style detectors, the ones structural/lexical friction actually moves. It will not reliably beat a learned classifier trained on instruction-tuning fingerprints (Pangram, GPTZero, Grammarly) — the brief's own "Ceilings of the Offline Approach" section says so, and nothing here changes that. Ship it as what it is: real, local, honest friction — not a guarantee against a trained model.
