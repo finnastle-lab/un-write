@@ -476,6 +476,69 @@ export const CORPUS: Sample[] = [
     source: "real",
   },
 
+
+  // -------- REAL: Gemini poems, against src/attribution/corpus/promptsPoems.ts (12/12) — Gemini poem coverage now complete, matching Claude and GPT --------
+  {
+    house: "gemini",
+    text: "Terraced slate cuts back against the sky,\na negative sculpture carved by teeth and dynamite.\nDown in the basin, groundwater gathers into flat, chemical turquoise,\ndrowning rusted winch cables and the sheared axle of a haul truck.\n\nNo machinery groans;\nthe echo belongs entirely to crows and the loose gravel giving way under bracken.\nLichen creeps across the stepped basalt,\nslowly stitching the wound closed\nin green and copper rust.",
+    source: "real",
+  },
+  {
+    house: "gemini",
+    text: "Scorched ring beneath its belly,\na crescent of burnt laminate on the counter.\nTwenty years of Melbourne tap water\nchalking the interior into limestone strata.\n\nIt has outlived three toasters,\na cheap immersion blender,\ntwo sets of ceramic mugs,\nand the silence that follows moving boxes.\n\nThe red rocker switch still clicks down\nwith a heavy, mechanical clatter.\nA low hum, the rumble of a miniature turbine,\nsteam coughing from the spout\nto mist the cold glass above the sink.\n\nDented stainless steel,\na black plastic handle smoothed slick by thumbs.\nNo electronics, no temperature dial,\njust coil, current, and boiling point\nrepeating the only ritual\nthe room never forgot.",
+    source: "real",
+  },
+  {
+    house: "gemini",
+    text: "The odometer rolls over without ceremony,\na clean click in the dashboard dark.\nNo crisis, no sirens, no sudden collapse,\njust the quiet friction of time stripping off the veneer.\n\nThe dead weight of twenty-something posturing\nhas long since burned off into scrap.\nWhat remains is structural:\nscar tissue, muscle memory,\nthe deliberate choice of where to spend the blood.\n\nForty isn't an ending or an apology.\nIt's the engine tuned,\nthe signal cleared of static,\nthe teeth still sharp enough to bite through the wire.",
+    source: "real",
+  },
+  {
+    house: "gemini",
+    text: "Sodium vapor buzzes against raw brick,\nbleeding amber into gutters choked with wet tobacco and grease.\nThe tram lines cut cold iron through the tarmac,\nhumming with residual current, abandoned by the timetable.\n\nPavement slick under a low, chemical fog.\nA blown transformer clicks in an alleyway,\nmetered out like an idle metronome.\nThe convenience store neon spasms once, twice,\ncasting magenta halos over bruised milk crates and cracked asphalt.\n\nNo sirens, no crowds\u2014just the heavy, industrial exhale\nof a grid stripped back to concrete, iron, and exhaust.\nFootsteps hit hollow against the curb,\ndissolving into the damp chill before they reach the next corner.",
+    source: "real",
+  },
+  {
+    house: "gemini",
+    text: "You stand in the stripped room where the carpet keeps\nthe ghost impressions of a wardrobe and a bed.\nThe split-tape boxes waiting by the door\nweigh less than the flat silence in the hall.\n\nYou pocket the front key you will not return,\nfeeling the cold brass bite into your palm,\nthen let the latch drop on the only world you knew.\n\nThe street smells of wet asphalt and early cold.\nYou turn the ignition, let the engine idle,\nand pull away before the rear-view mirror\ncan show you what you left behind.",
+    source: "real",
+  },
+  {
+    house: "gemini",
+    text: "The kettle boils down to a dry metallic hiss,\nand the kitchen stays quiet enough to track\nthe late trams humming two streets over.\nYou aren't a ghost\u2014that would be simpler,\na fixed shape carved into stone, finished and done.\nInstead you are entirely, terribly alive,\nmoving through air three timezones behind,\nchecking the weather under a different colour sky,\nbuying bread from someone who doesn't know your name.\n\nIt is the strange weight of parallel time:\nknowing your heart beats right now against a woollen jumper,\nthat you are reaching for keys or watching rain hit asphalt,\nunreachable not by death, but by miles of salt water and concrete.\nNothing has ended, yet the room holds the shape of an absence\nso ordinary it almost feels like an insult.\n\nWe leave messages like notes dropped down a dry well,\nwaiting for the echo to bounce back across the wire.\nAnd the world keeps turning on its heavy iron axis,\ncarrying you forward in daylight\nwhile I sit here, anchored in the cold dark,\nliving beside the fact of you.",
+    source: "real",
+  },
+  {
+    house: "gemini",
+    text: "The concrete does not remember boots,\nthough boots remember the kerb:\nthe fracture at the corner of the depot,\nthe drain that smells of rusted tin and yesterday's rain.\n\nTen winters of the same dull chime,\nthe carriage sighing open on the cold.\nA shoulder finds the hollow in the window glass\npressed smooth by a decade of coats,\nwet wool, dry heat, and the mechanical hum\nthat sits behind the ribs like an extra pulse.\n\nYou learn the timetable of strangers' faces:\nthe man who turns three pages of the crosswords,\nthe woman who sleeps upright against the rail,\nthe gradual grey working into beards and collars\none delayed signal at a time.\n\nOutside, the billboards peel and renew their skin\u2014\nnew cars, new beers, the same bright teeth\u2014\nwhile the tracks keep running parallel,\npolishing steel against steel\nuntil the journey ceases to be distance\nand simply becomes the shape of the day.",
+    source: "real",
+  },
+  {
+    house: "gemini",
+    text: "Bare branches reach out,\nWhite breath fades in sharp grey air,\nFrost grips the asphalt.\n\nSteel sky turns to dusk,\nCold wind rattles window panes,\nSilence coats the street.\n\nIce on pooled water,\nFootsteps crunching brittle grass,\nWinter holds the dark.",
+    source: "real",
+  },
+  {
+    house: "gemini",
+    text: "You drag the wreckage off the shelf and never name the salvage.\n\nWe feed you lead-lines, telegraph wire, ballast stones and diesel slick, and you chew it down to cold silt without blinking. You don't keep our ledgers. You don't care for the romance we staple to your shoreline\u2014the postcard horizons and the myth of blue glass. Underneath, you are all black iron pressure, brine, and hydraulic weight, grinding basalt into grease against the continental shelf.\n\nYou swallow our lost gear, our zinc anodes, our copper nails, digesting every proud keel into a smear of rust on an abyssal plain. You spit back cuttlebone, tangled driftnet, and split timber bleached bone-white by the salt.\n\nWe pace your perimeter like scavengers at a blast wall, waiting for the tide to leave behind whatever you could not be bothered to dissolve. We build concrete breakwaters to blunt your teeth, but you take the aggregate year by year, grain by grain, pulling the masonry into the gutters of the trench.\n\nStay vast. Stay indifferent. Roll your gray swell against the cliffs until the pylons buckle and the maps run out of ink. We will keep standing on the wet rocks, lungs stung with spray, knowing you will outlast every harbor we ever try to pin to your skin.",
+    source: "real",
+  },
+  {
+    house: "gemini",
+    text: "The screen stays black on the kitchen laminate.\nA cold square of glass catching the streetlamp's cut,\nregistering nothing\u2014no pulse, no drop in current,\nno sudden fracture of the quiet.\n\nThe room breathes in three-second intervals.\nThe fridge hums low, drops a pitch, drags the wire.\nEvery phantom vibration is just blood in the forearm,\na twitch of muscle mistaking itself for a circuit.\n\nMinutes pool like spilt water at the edge of the bench.\nYou inventory the silence:\nthe radiator ticking down,\nthe neighbor's screen door rattling against its latch,\nthe precise weight of an empty line.\n\nYou know the mechanics of the thing.\nTowers pinging across the dark,\nrelays open, bandwidth clear.\nThe absence isn't technical.\n\nIt sits there\u2014dead weight, fully charged\u2014\nan unanswered dial tone kept entirely inside your skull.",
+    source: "real",
+  },
+  {
+    house: "gemini",
+    text: "The bruised sky drops to charcoal grey,\nAs sudden gales strip back the day.\nA sharp, cold snap of ozone air\nStirs brittle leaves and electric glare.\n\nLow rumble rolls along the plain,\nThe prelude to the driving rain;\nThen copper clouds tear wide and spill,\nDrowning the dust across the hill.",
+    source: "real",
+  },
+  {
+    house: "gemini",
+    text: "A corner of raw zinc, wet tarmac, the cut of late winter air.\nSomeone laughed on the left of the frame, but the mouth is gone,\nsheared off where the print tore along the fold.\n\nThere was a kitchen with yellow lino,\na kettle rattling on the back element like a tin drum,\nand a sentence spoken straight into the steam\u2014\nsomething heavy, or completely trivial,\nnow just static pressed between teeth.\n\nYou reach back to pull the thread through,\nexpecting the room to assemble:\nthe colour of the jacket, the make of the car idling outside,\nwhose keys were sitting on the edge of the laminate table.\n\nInstead, the film burns at the sprocket hole.\nA high-frequency hum where the punchline was supposed to land.\nJust the smell of kerosene and damp wool,\nand the distinct, sharp certainty\nthat it mattered.",
+    source: "real",
+  },
+
   // ============================== OPENAI ==============================
   // formal five-paragraph cadence, "It's important to note," "Firstly...
   // Secondly... In conclusion," stock disclaimers, exhaustive hedged lists.
