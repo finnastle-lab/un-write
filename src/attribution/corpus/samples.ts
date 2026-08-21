@@ -218,6 +218,69 @@ export const CORPUS: Sample[] = [
     source: "real",
   },
 
+
+  // -------- REAL: Claude poems, against src/attribution/corpus/promptsPoems.ts (12/12) — poem round, testing creative/poetic register specifically --------
+  {
+    house: "claude",
+    text: "The quarry stopped taking anything from the ground\nsometime in the seventies, and the ground\nhas been quietly taking it back since.\n\nWater pools where the trucks used to turn.\nBlackberry runs the length of the old access road,\nand nobody minds, because nobody's coming.\n\nThere's a ledge halfway down where a name is scratched\ninto the rock, no date, just initials,\nand the letters have gone soft at the edges\nthe way things go soft when nobody's checking on them.\n\nAt the bottom, where the drop used to matter,\nthe water is the color of nothing \u2014\nnot green, not grey, just water\nholding still because it has nowhere left to be.",
+    source: "real",
+  },
+  {
+    house: "claude",
+    text: "It sits on the back left burner, always,\nthe one that doesn't quite line up with the others,\nand the whistle went years ago, so now\nit just gets loud in a different way \u2014\na low complaint instead of a shout.\n\nThe handle's been re-taped twice.\nOnce by you, badly, and once by someone\nwho actually knew what they were doing,\nand you can still see the seam between the two jobs\nif you look for it, which nobody does.\n\nIt's not sentimental, exactly.\nIt's just been there longer than most of the people\nwho've stood at this counter,\nand it still does the one thing it was ever asked to do,\nwhich is more than you can say for most of us.",
+    source: "real",
+  },
+  {
+    house: "claude",
+    text: "Forty doesn't arrive like a door closing.\nIt arrives like noticing the door was already shut\nand you'd been in the room a while.\n\nNothing dramatic happened on the day.\nYou made coffee. Someone said the number out loud\nand it sat there, ordinary, refusing to mean anything\nuntil later, alone, when it meant everything at once\nfor about four minutes and then went quiet again.\n\nYou keep expecting to feel finished with something.\nInstead you feel like the middle of a sentence\nthat's taking its time getting to the point,\nwhich, it turns out, is the whole thing \u2014\nnot the point. Just the taking time.",
+    source: "real",
+  },
+  {
+    house: "claude",
+    text: "At 3am the street belongs to the people\nwho aren't trying to get anywhere,\nwhich turns out to be more people than you'd think.\n\nA cab idles outside the closed chemist,\nits driver eating something out of foil,\nin no apparent hurry to be paid.\n\nThe traffic lights keep working anyway,\nred to green to red, for an intersection\nthat hasn't had a car through it in ten minutes,\npatient in the specific way that machines are patient,\nwhich isn't patience at all, just not knowing better.\n\nSomewhere above the shopfronts a window is still lit,\nand you don't wonder who's up.\nYou wonder what it's like to be the light\nthat someone else notices from the street\nand never finds out anything more about.",
+    source: "real",
+  },
+  {
+    house: "claude",
+    text: "You will not remember packing the boxes.\nYou'll remember the tape gun running out\nat the worst possible moment, and your mother\nholding the flaps down with her hip\nwhile you went to find more, swearing under your breath\nin a way you'd never done in front of her before.\n\nThe drive will feel longer than the map said.\nSomewhere past the second town you don't recognize the name of,\nit will occur to you, plainly, without warning,\nthat you are going somewhere you have never been\nto live a life no one there has met yet.\n\nYou will not cry in the car. You'll save it\nfor the first night, alone, in a room\nthat still smells like paint,\nwhen the quiet turns out to be a different kind of quiet\nthan the one you were trying to leave.",
+    source: "real",
+  },
+  {
+    house: "claude",
+    text: "You are not far, technically.\nA few time zones, a screen, a lag\nbefore your face catches up to your voice.\n\nI keep doing the math anyway \u2014\nwhat you're probably doing right now,\nwhether it's morning there or already gone.\n\nIt's a strange kind of missing,\nthe kind where nothing is wrong,\nwhere you'd laugh if I said it out loud,\nso I don't, and instead I just notice\nhow much of the day I spend\ntranslating my hours into yours.",
+    source: "real",
+  },
+  {
+    house: "claude",
+    text: "Same platform, same three carriages back,\nsame woman with the paper who never turns past page four.\nTen years of this, and the view from the window\nstill hasn't changed enough to notice changing.\n\nYou used to read on this train. Now you just watch it \u2014\nthe same gasworks, the same flooded field\nthat's flooded every single winter\nlike it's forgotten how to be anything else.\n\nSomewhere in year four you stopped minding.\nSomewhere in year seven you started, almost, to need it \u2014\nthe one part of the day that asks nothing of you\nexcept to sit, and be carried, and arrive\nexactly where you knew you would.",
+    source: "real",
+  },
+  {
+    house: "claude",
+    text: "Snow on the woodpile, untouched since Tuesday.\nNobody's cold enough yet to need it.\n\nA single crow, black against all that white,\ndeciding, loudly, that this is still his fence.\n\nIce at the edge of the pond, thin enough to see through,\nthick enough that nothing underneath is going anywhere.",
+    source: "real",
+  },
+  {
+    house: "claude",
+    text: "You don't ask for anything, which is the trouble with you.\nYou just keep doing what you were always doing,\nlong before there was a name for what you were doing,\nand you'll keep doing it after every name for you is gone.\n\nI've stood at your edge more times than I can count\nand said nothing you could hear,\nwhich you didn't seem to mind, being used to it,\nbeing used to everyone arriving with something to say\nand leaving without having said it.\n\nYou don't hold grudges. You don't remember me\nfrom one visit to the next. That should bother me\nmore than it does. Instead I find it restful \u2014\nbeing nothing to something that large,\nbeing allowed, for once, to not matter.",
+    source: "real",
+  },
+  {
+    house: "claude",
+    text: "The phone doesn't ring, which is its own kind of sound.\nYou've started noticing the specific silence\nthat means not yet, rather than the one that means never,\nthough from the inside they feel the same.\n\nYou check it in a way you'd deny if asked.\nNot obsessively. Just often enough\nthat the checking has become a kind of waiting\nthat doesn't feel like waiting, more like breathing,\nsomething your body does without consulting you.\n\nWhen it does ring, eventually, it will be someone else,\nand you'll answer anyway, disappointed in a way\nyou'll be ashamed of for exactly as long as the call lasts,\nand then you'll go back to not-waiting,\nwhich is the only kind of waiting anyone can survive doing forever.",
+    source: "real",
+  },
+  {
+    house: "claude",
+    text: "The clouds came in low and mean by four,\nthe wind picked a fight with every open door,\nthe gutters filled before the first hour passed,\nand everyone agreed: this one won't be fast.\n\nThe power flickered twice and then held on,\nthe streetlights buzzed against the coming dawn,\nand somewhere down the block a dog kept barking\nat something in the dark worth remarking.\n\nBy morning it had blown itself out west,\nleaving branches down and no one dressed\nfor the cold that trailed in behind the rain \u2014\nthe kind of storm that always comes again.",
+    source: "real",
+  },
+  {
+    house: "claude",
+    text: "There's a kitchen in it, and someone's hands,\nand the specific sound of a chair being pulled out,\nbut the face won't come, no matter how long I sit with it.\n\nI know it's summer, from the light.\nI know I was young, from the size of the table.\nI know someone laughed, because I can still feel\nthe shape my own face made in response to it,\neven though the joke itself is gone completely.\n\nIt's not sad, exactly, this half-a-memory.\nIt's more like standing at a door\nthat used to lead somewhere specific,\nand finding it opens now onto nothing but the feeling\nof having once known exactly where it went.",
+    source: "real",
+  },
+
   // ============================== GEMINI ==============================
   // structured-then-literary swing, personification, rule-of-three,
   // staccato, sensory catalogue, adjective pairs, dramatic single lines.
