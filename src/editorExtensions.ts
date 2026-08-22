@@ -51,7 +51,10 @@ export const matchState = StateField.define<MatchState>({
   provide: (f) => EditorView.decorations.from(f, (v) => v.deco),
 });
 
-/** Hover a highlight → the note, in FA's voice. */
+/** Hover a highlight → the note, in FA's voice, and — where the de-ai step
+ * has a safe swap — a button to apply it. Clicking rewrites the doc locally;
+ * no text leaves the browser, and it's every bit the AI-rewriting-AI joke the
+ * footer already owns. */
 export const tellTooltip = hoverTooltip((view, pos) => {
   const { matches } = view.state.field(matchState);
   const m = matches.find((x) => pos >= x.from && pos <= x.to);
@@ -71,6 +74,21 @@ export const tellTooltip = hoverTooltip((view, pos) => {
       note.className = "tell-tooltip-note";
       note.textContent = m.note;
       dom.append(label, note);
+      if (m.suggestion !== undefined) {
+        const apply = document.createElement("button");
+        apply.type = "button";
+        apply.className = "tell-tooltip-apply";
+        apply.textContent = m.suggestion
+          ? `un-write it → "${m.suggestion}"`
+          : "un-write it → cut";
+        apply.onmousedown = (e) => {
+          e.preventDefault();
+          view.dispatch({
+            changes: { from: m.from, to: m.to, insert: m.suggestion },
+          });
+        };
+        dom.append(apply);
+      }
       return { dom };
     },
   };
