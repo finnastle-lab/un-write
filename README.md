@@ -10,6 +10,7 @@ The joke it owns: a tool that rewrites your text to sound less like AI is an AI 
 
 - **v1** — cleanly-detectable tells (regex/string), exclusion gate, colour-coded highlights, hover notes in FA's voice, transparent score.
 - **v2** — structural / rhythm tells via a sentence+paragraph tokenizer: staccato runs, "marching in formation", setup-then-list openers, negation→affirmation, rule-of-three, punchy two-word closers. These carry the durable **weight-3** end of the score.
+- **v3a — the de-ai step (local, deterministic)** — where a tell has one safe, same-part-of-speech, drop-in replacement, clicking a highlight offers it as a tracked-changes-style swap ("un-write it →"). No LLM, nothing leaves the browser. Sourced from the `avoid-ai-writing` skill's replacement tables; each `Rule` in `src/rules/` can carry an optional `suggest(matchedText)` (see `src/rules/swaps.ts`). Most tells still need real rewriting, not a lookup, and stay flag-only on purpose — see `docs/SCOPE.md` §7.1.
 - **v3 — deep pass (live, opt-in)** — the semantic layer (teleporting arguments, faux balance, near-miss metaphors, superficial -ing analysis, performed warmth). Model-judged, so it runs **off-device**: the user brings their own Anthropic API key (`claude-sonnet-5`), stored only in their browser, and text is sent to Anthropic only when they click *deep pass*. The honest break in the local-first promise, surfaced in the UI. `src/deepPass.ts` is the browser-direct call; `src/rules/semantic.ts` holds the types.
 
 Clean human prose scores ~0; AI slop pegs 100; structural tells move it hardest.
@@ -18,7 +19,7 @@ Theme toggle (light/dark, persisted) swaps the cloud mark, the yin-yang flourish
 
 ### How the engine is laid out
 
-- `src/rules/` — one file per tell category (`structure`, `punctuation`, `phrases`, `transitions`, `vocab`), each exporting `Rule[]`; `semantic.ts` is the v3 layer. `index.ts` layers them, `exclusions.ts` is the do-not-flag gate + overlap resolver, `tokenize.ts` is the shared sentence/paragraph splitter with offsets. Hot-swappable by design — the ruleset decays.
+- `src/rules/` — one file per tell category (`structure`, `punctuation`, `phrases`, `transitions`, `vocab`), each exporting `Rule[]`; `semantic.ts` is the v3 layer. `index.ts` layers them, `exclusions.ts` is the do-not-flag gate + overlap resolver, `tokenize.ts` is the shared sentence/paragraph splitter with offsets, `swaps.ts` is the de-ai step's word/phrase swap dictionaries. Hot-swappable by design — the ruleset decays.
 - `src/score.ts` — transparent score; every tuning knob is in `SCORE_CONFIG`.
 - `src/editorExtensions.ts` — CodeMirror 6 decorations + hover tooltip. Highlights ride on top of plain text; they never enter the document model.
 - `src/useTheme.ts` — light/dark toggle, overrides system, persisted.

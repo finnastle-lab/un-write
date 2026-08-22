@@ -321,6 +321,21 @@ body {
   font-size: 13.5px;
   line-height: 1.5;
 }
+.tell-tooltip-apply {
+  display: block;
+  margin-top: 10px;
+  padding: 5px 10px;
+  border: 1px solid color-mix(in srgb, var(--paper) 35%, transparent);
+  border-radius: 6px;
+  background: none;
+  color: var(--paper);
+  font-size: 12px;
+  font-family: inherit;
+  cursor: pointer;
+}
+.tell-tooltip-apply:hover {
+  background: color-mix(in srgb, var(--paper) 12%, transparent);
+}
 
 .admission {
   grid-area: admission;

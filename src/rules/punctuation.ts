@@ -1,5 +1,6 @@
 import type { Rule } from "./types";
 import { spans } from "./util";
+import { wordSwap } from "./swaps";
 
 export const punctuation: Rule[] = [
   {
@@ -15,6 +16,7 @@ export const punctuation: Rule[] = [
     category: "punctuation",
     note: "Enthusiasm you didn't earn, punctuation doing the feeling for you. Delete it and see if the sentence still means it.",
     detect: (t) => spans(t, /!/g),
+    suggest: () => "",
   },
   {
     id: "curly-double-quote",
@@ -22,6 +24,7 @@ export const punctuation: Rule[] = [
     category: "punctuation",
     note: "Curly double quotes, pasted straight out of somewhere that made them for you. Not damning on its own. Just a thread hanging off the jumper.",
     detect: (t) => spans(t, /[“”]/g),
+    suggest: wordSwap({ "“": '"', "”": '"' }),
   },
   {
     id: "markdown-artefact",

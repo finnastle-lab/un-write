@@ -1,5 +1,6 @@
 import type { Rule } from "./types";
 import { spans, wordList } from "./util";
+import { wordSwap } from "./swaps";
 
 // Grouped so each cluster of watchlist words gets its own note rather than one
 // generic verdict. Vocabulary tells decay fastest — weighted lowest, and this
@@ -24,6 +25,16 @@ export const vocab: Rule[] = [
           "spearhead",
         ]),
       ),
+    suggest: wordSwap({
+      leverage: "use",
+      harness: "use",
+      foster: "encourage",
+      elevate: "improve",
+      embark: "start",
+      underscore: "highlight",
+      spearhead: "lead",
+      unlock: "enable",
+    }),
   },
   {
     id: "vocab-buzz-adjectives",
@@ -46,6 +57,13 @@ export const vocab: Rule[] = [
           "state-of-the-art",
         ]),
       ),
+    suggest: wordSwap({
+      seamless: "smooth",
+      seamlessly: "smoothly",
+      robust: "strong",
+      comprehensive: "thorough",
+      "cutting-edge": "latest",
+    }),
   },
   {
     id: "vocab-reveal-verbs",
@@ -53,6 +71,7 @@ export const vocab: Rule[] = [
     category: "vocab",
     note: "delve, quietly, seamlessly weave. The register that lowers its voice to sound profound. \"Quietly\" is the loudest word on this list now. (Literal ones slip through — it's a nudge to check the sentence, not a verdict.)",
     detect: (t) => spans(t, wordList(["delve", "quietly", "seamlessly weave"])),
+    suggest: wordSwap({ delve: "explore" }),
   },
   {
     id: "pathetic-fallacy",
@@ -93,5 +112,9 @@ export const vocab: Rule[] = [
           "a testament to",
         ]),
       ),
+    suggest: wordSwap({
+      "a testament to": "shows",
+      "watershed moment": "turning point",
+    }),
   },
 ];
