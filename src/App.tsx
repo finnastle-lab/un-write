@@ -10,7 +10,6 @@ import {
 import { score } from "./score";
 import { classifyVoice } from "./voice";
 import { useTheme } from "./useTheme";
-import cloud from "./assets/cloud.png";
 import signatureBlack from "./assets/signature-black.png";
 import signatureWhite from "./assets/signature-white.png";
 
@@ -40,9 +39,10 @@ export default function App() {
 
   return (
     <div className="app">
+      <span className="filmic-spine" aria-hidden="true" />
       <header className="chrome">
         <div className="brand">
-          <img className="brand-icon" src={cloud} alt="" />
+          <img className="brand-icon" src={signature} alt="" />
           <div>
             <h1 className="wordmark">the un-write</h1>
             <p className="tagline">Detection, obsolete by design.</p>
