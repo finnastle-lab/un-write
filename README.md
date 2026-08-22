@@ -15,7 +15,8 @@ The joke it owns: a tool that rewrites your text to sound less like AI is an AI 
   - A **model-attribution classifier** — a small, fully local, trained multinomial logistic regression (`src/attribution/`) that names which house's *register* (Claude / Gemini / GPT / human) a paste resembles, from stylometric features the existing rules engine already computes. This is stylometry, not forensics: it can't read a real watermark (those keys are private), and "unknown" is a normal, correct answer. **v0's training corpus is curated and synthetic**, not scraped real transcripts — see `docs/SCOPE-v3.md` §1D for why and how to swap in real data later.
   - A **watermark-survival slider** (`src/watermark.ts`) — simulates editing a paste through 5 intensities and measures how much survives as unbroken n-gram windows, projecting that onto an open watermarking scheme (Kirchenbauer et al.'s KGW). A simulation, never a reading of a real mark.
   - An illustrative green/red "shadow key" token demo teaching the token-probability-biasing mechanism itself.
-  - Whole app restyled onto `fa-design-system`'s type (Instrument Serif / InterFA / Cousine, self-hosted) and palette.
+  - Whole app restyled onto the restrained FA identity — Instrument Serif / InterFA / Cousine (self-hosted), the FA sun signature as the primary mark, and the filmic dash-strip as a single structural spine.
+- **v3a — the de-ai step (local, deterministic)** — where a tell has one safe, same-part-of-speech, drop-in replacement, clicking a highlight offers it as a tracked-changes-style swap ("un-write it →"). No LLM, nothing leaves the browser. Sourced from the `avoid-ai-writing` skill's replacement tables; each `Rule` in `src/rules/` can carry an optional `suggest(matchedText)` (see `src/rules/swaps.ts`). Most tells still need real rewriting, not a lookup, and stay flag-only on purpose — see `docs/SCOPE.md` §7.1.
 
 Clean human prose scores ~0; AI slop pegs 100; structural tells move it hardest.
 
@@ -23,7 +24,7 @@ Theme toggle (light/dark, persisted) swaps the cloud mark, the yin-yang flourish
 
 ### How the engine is laid out
 
-- `src/rules/` — one file per tell category (`structure`, `punctuation`, `phrases`, `transitions`, `vocab`, `figurative`), each exporting `Rule[]`. `index.ts` layers them, `exclusions.ts` is the do-not-flag gate + overlap resolver, `tokenize.ts` is the shared sentence/paragraph splitter with offsets. Hot-swappable by design — the ruleset decays.
+- `src/rules/` — one file per tell category (`structure`, `punctuation`, `phrases`, `transitions`, `vocab`, `figurative`), each exporting `Rule[]`. `index.ts` layers them, `exclusions.ts` is the do-not-flag gate + overlap resolver, `tokenize.ts` is the shared sentence/paragraph splitter with offsets, `swaps.ts` is the de-ai step's word/phrase swap dictionaries. Hot-swappable by design — the ruleset decays.
 - `src/score.ts` — transparent score; every tuning knob is in `SCORE_CONFIG`.
 - `src/stylometry.ts` — burstiness, em-dash/semicolon rate, function-word frequency, promoted to reusable numbers.
 - `src/watermark.ts` — the survival estimator + the local, deterministic "simulated edit intensity" transform behind the slider.

@@ -36,6 +36,7 @@ export function analyse(text: string): Match[] {
         category: rule.category,
         weight: w,
         note: rule.note,
+        suggestion: rule.suggest?.(text.slice(span.from, span.to)),
       });
     }
   }

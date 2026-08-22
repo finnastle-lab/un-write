@@ -1,5 +1,6 @@
 import type { Rule } from "./types";
 import { spans, wordList } from "./util";
+import { wordSwap } from "./swaps";
 
 export const transitions: Rule[] = [
   {
@@ -20,6 +21,14 @@ export const transitions: Rule[] = [
           "as such",
         ]),
       ),
+    suggest: wordSwap({
+      furthermore: "also",
+      moreover: "also",
+      "in addition": "also",
+      additionally: "also",
+      "that said": "but",
+      "with that being said": "but",
+    }),
   },
   {
     id: "hedge-stack",
@@ -31,6 +40,16 @@ export const transitions: Rule[] = [
         t,
         /\b(?:may potentially|could potentially|could arguably|might arguably|often tends to|can sometimes|may (?:sometimes )?in some cases)\b/gi,
       ),
+    suggest: wordSwap({
+      "may potentially": "may",
+      "could potentially": "could",
+      "could arguably": "could",
+      "might arguably": "might",
+      "often tends to": "tends to",
+      "can sometimes": "can",
+      "may in some cases": "may",
+      "may sometimes in some cases": "may",
+    }),
   },
   {
     id: "prepositional-cliche",
@@ -50,5 +69,6 @@ export const transitions: Rule[] = [
           "for the purpose of",
         ]),
       ),
+    suggest: wordSwap({ "in order to": "to" }),
   },
 ];

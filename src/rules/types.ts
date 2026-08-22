@@ -25,6 +25,14 @@ export interface Rule {
   /** the note, in FA's voice — static, authored once per rule */
   note: string;
   detect(text: string): RawSpan[];
+  /**
+   * The de-ai step: a deterministic, local, drop-in replacement for the
+   * matched text — no LLM, text never leaves the browser (v3a from
+   * docs/SCOPE.md). Only set where a single same-part-of-speech swap is
+   * actually safe; most tells need real rewriting, not a lookup, and stay
+   * flag-only on purpose.
+   */
+  suggest?(matchedText: string): string | undefined;
 }
 
 export interface Match extends RawSpan {
@@ -33,6 +41,7 @@ export interface Match extends RawSpan {
   category: Category;
   weight: number;
   note: string;
+  suggestion?: string;
 }
 
 export const CATEGORY_META: Record<
